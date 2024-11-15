@@ -2,7 +2,7 @@ import PropertiesReader from "properties-reader";
 
 
 class Properties {
-    static PropertyFilePath = "../../wichteln.properties";
+    static PropertyFilePath = __dirname + "/../../wichteln.properties";
     static prop = PropertiesReader(this.PropertyFilePath);;
     
     static get (property: string): any {

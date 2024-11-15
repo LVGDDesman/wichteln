@@ -1,0 +1,19 @@
+services:
+
+  db:
+    image: mariadb
+    hostname: mariadb.local
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: 123456
+      MARIADB_USER: wichteln
+      MARIADB_PASSWORD: 123456
+      MARIADB_DATABASE: wichteln
+    ports:
+      - 3306:3306
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 28080:8080
