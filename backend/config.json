@@ -1,0 +1,16 @@
+
+{
+    "api" : {
+        "baseurl": "/api"
+    },
+    "db": {
+        "host": "localhost",
+        "user": "wichteln",
+        "password": "123456",
+        "database": "wichteln"
+        
+    },
+    "jwt" : {
+        "secret": "123456123456"
+    }
+}

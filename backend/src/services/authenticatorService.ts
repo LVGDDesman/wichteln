@@ -1,14 +1,9 @@
-import { Request, ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
-import DataBaseInstance from "../services/databaseService";
 import { User } from "../models/models";
-import Properties from "./propertiesService";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+const config = require('../../config.json');
 
 class Authenticator {
-
-    static secretKey: string = Properties.get("jwt.secret");
 
     static hashPassword(password: string): string {
         const salt: string = bcrypt.genSaltSync(10);
@@ -21,22 +16,11 @@ class Authenticator {
 
 
     static createJWT(id: string, email: string): string {
-        const token = jwt.sign({ userId: id, email: email }, this.secretKey, {
-            expiresIn: '1h', // Token expiration time
+        const token = jwt.sign({ userId: id, email: email }, config.jwt.secret, {
+            expiresIn: '7d', // Token expiration time
         });
         return token;
 
-    }
-
-    static authenticateToken(authHeader: string) {
-        const token = authHeader && authHeader.split(' ')[1]
-
-        jwt.verify(token, process.env.TOKEN_SECRET as string, (err: any, user: any) => {
-            console.log(err)
-
-            if (err) return "";
-            return user;
-        })
     }
 }
 

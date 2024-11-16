@@ -1,8 +1,7 @@
 import mariadb from "mariadb";
-import Properties from "./propertiesService";
 import { User, UserData } from "../models/models";
 import Authenticator from "./authenticatorService";
-
+const config = require('../../config.json');
 
 let instance: any;
 
@@ -19,10 +18,10 @@ class DataBase {
         }
         instance = this;
             
-        this.dbHost = Properties.get("db.host");
-        this.dbUser = Properties.get("db.user");
-        this.dbPassword = Properties.get("db.password");
-        this.database = Properties.get("db.database");
+        this.dbHost = config.db.host;
+        this.dbUser = config.db.user;
+        this.dbPassword = config.db.password;
+        this.database = config.db.database;
         this.pool = mariadb.createPool({
             host: this.dbHost,
             user: this.dbUser,
@@ -73,7 +72,7 @@ class DataBase {
         try {
             con = await this.pool.getConnection();
 
-            const query = "SELECT id, username, email, hash FROM user WHERE email = ?";
+            const query = "SELECT id, username, email, password FROM user WHERE email = ?";
             const result = await con.query(query, [email]);
             let user:User  = result[0];
             return user;

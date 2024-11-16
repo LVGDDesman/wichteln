@@ -25,7 +25,9 @@ class requestHandler {
             res.status(401).json({ error: 'User exists' });
         } else {
             const userId = await DataBaseInstance.createUser(username, email, password);
-            res.status(200).json({"userId": userId});
+            const token = Authenticator.createJWT(String(userId), email);
+            res.status(201).json({ "id": userId, "username": username, "token": token });
+            //res.status(201).json({"id": userId});
         }
 
     }
