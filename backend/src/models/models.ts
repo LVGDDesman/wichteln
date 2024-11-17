@@ -5,10 +5,9 @@ export interface login {
 }
 
 export interface externalUser {
-    id?: number,
     email:string,
     username: string,
-    token: string,
+    token?: string,
 }
 
 export interface User {
@@ -18,7 +17,7 @@ export interface User {
     password: string,
 }
 
-export interface UserData extends User {
+export interface UserData extends externalUser {
     wichtelee?: number,
     wish?: string,
     address?: string

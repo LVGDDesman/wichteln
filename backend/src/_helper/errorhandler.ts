@@ -1,4 +1,6 @@
-function errorHandler(err: any, req: any, res: any, next: any) {
+import express from "express";
+
+function errorHandler(err: any, req: express.Request, res: any, next: express.NextFunction) {
     console.log(err)
     if (typeof (err) === 'string') {
         // custom application error

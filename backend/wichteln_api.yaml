@@ -72,16 +72,16 @@ paths:
       responses:
         '200':
           description: User updated
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/login-res"
+          #content:
+          #  application/json:
+          #    schema:
+          #      $ref: "#/components/schemas/login-res"
         '400':
           description: Invalid Input
         '401':
           description: Missing/Wrong JWT
   /api/user/delete:
-    post:
+    get:
       responses:
         '200':
           description: User deleted
@@ -142,12 +142,6 @@ components:
             format: email
             nullable: true
           password:
-            type: string
-            nullable: true
-          address:
-            type: string
-            nullable: true
-          wish:
             type: string
             nullable: true
       wichtelData:

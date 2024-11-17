@@ -15,8 +15,9 @@ class Authenticator {
     }
 
 
-    static createJWT(id: string, email: string): string {
-        const token = jwt.sign({ userId: id, email: email }, config.jwt.secret, {
+    static createJWT(id: string): string {
+        const token = jwt.sign({"id": id}, config.jwt.secret, {
+            algorithm: 'HS256',
             expiresIn: '7d', // Token expiration time
         });
         return token;

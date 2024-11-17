@@ -7,36 +7,34 @@ userRouter.post('/authenticate', authenticate);
 userRouter.get('/', getUser);
 userRouter.post('/create', createUser);
 userRouter.post('/update', updateUser);
-userRouter.post('/delete', deleteUser);
+userRouter.get('/delete', deleteUser);
 
 
-function createUser(req: { body: any; }, res: { status: any; json: (arg0: any) => any; }, next: any) {
+function createUser(req: express.Request, res: express.Response, next: any) {
     userService.createUser(req.body)
         .then((user: externalUser) => res.status(201).json(user))
         .catch(next);
 }
 
-function authenticate(req: { body: login; }, res: {
-    status: any; json: (arg0: any) => any;
-}, next: any) {
-    userService.authenticate(req.body)
+function authenticate(req: express.Request, res: express.Response, next: any) {
+    userService.authenticate(req.body.id)
         .then((user: externalUser) => res.json(user))
         .catch(next);
 }
 
-function getUser(req: { body: any; }, res: { json: (arg0: any) => any; }, next: any) {
-    userService.getUser(req.body)
-        .then((user: any) => res.json(user))
+function getUser(req: express.Request, res: express.Response, next: any) {
+    userService.getUser(req)
+        .then((user: externalUser) => res.json(user))
         .catch(next);
 }
 
-function updateUser(req: { body: any; }, res: { json: (arg0: any) => any; }, next: any) {
-    userService.updateUser(req.body)
+function updateUser(req: express.Request, res: express.Response, next: any) {
+    userService.updateUser(req)
         .then((user: any) => res.json(user))
         .catch(next);
 }
-function deleteUser(req: { body: any; }, res: { json: (arg0: any) => any; }, next: any) {
-    userService.deleteUser(req.body)
+function deleteUser(req: express.Request, res: express.Response, next: any) {
+    userService.deleteUser(req)
         .then((user: any) => res.json(user))
         .catch(next);
 }

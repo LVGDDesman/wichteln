@@ -1,6 +1,6 @@
 import express from "express";
-import  errorHandler from "./_helper/errorhandler";
-import jwt from "./_helper/jwt";
+import errorHandler from "./_helper/errorhandler";
+import jwtauth from "./_helper/jwt";
 import * as OpenApiValidator from 'express-openapi-validator';
 import wichtelRouter from './wichtel/wichtelController';
 import userRouter from "./users/userController";
@@ -9,7 +9,7 @@ const app = express();
 const baseurl = "/api"
 
 app.use(express.json());
-app.use(jwt());
+app.use(jwtauth());
 app.use(
   OpenApiValidator.middleware({
     apiSpec: './wichteln_api.yaml',
