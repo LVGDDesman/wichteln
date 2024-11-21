@@ -1,5 +1,4 @@
 services:
-
   db:
     image: mariadb
     hostname: mariadb.local

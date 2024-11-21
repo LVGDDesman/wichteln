@@ -13,12 +13,12 @@ app.use(jwtauth());
 app.use(
   OpenApiValidator.middleware({
     apiSpec: './wichteln_api.yaml',
-    validateRequests: true, 
-    validateResponses: true, 
+    validateRequests: true,
+    validateResponses: true,
   }),
 );
 
-app.use(baseurl +'/user', userRouter);
+app.use(baseurl + '/user', userRouter);
 app.use(baseurl + '/wichtel', wichtelRouter);
 
 
