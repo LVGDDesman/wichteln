@@ -1,37 +1,34 @@
-import express from "express";
-import userService = require("./wichtelService");
-import { login } from "../models/models";
+import express from "express"
+import wichtelService = require("./wichtelService")
+import { WichtelData, WichteleeData } from "../models/models"
 
-const wichtelRouter = express.Router();
-wichtelRouter.post("/", addWichtelData);
-wichtelRouter.get("/", getWichtelData);
-wichtelRouter.get("/wichtelee", getWichtelee);
+const wichtelRouter = express.Router()
+wichtelRouter.post("/", setWichtelData)
+wichtelRouter.get("/", getWichtelData)
+wichtelRouter.get("/wichtelee", getWichtelee)
 
-function addWichtelData(
+function setWichtelData(
   req: express.Request,
   res: express.Response,
   next: any
 ) {
-  userService
-    .addWichtelData(req.body)
-    .then((user: any) => res.json(user))
-    .catch(next);
+  wichtelService.setWichtelData(req.body).catch(next)
 }
 function getWichtelData(
   req: express.Request,
   res: express.Response,
   next: any
 ) {
-  userService
-    .getWichtelData(req.body)
-    .then((user: any) => res.json(user))
-    .catch(next);
+  wichtelService
+    .getWichtelData(req)
+    .then((wichtelData: WichtelData) => res.json(wichtelData))
+    .catch(next)
 }
 function getWichtelee(req: express.Request, res: express.Response, next: any) {
-  userService
-    .getWichtelee(req.body)
-    .then((user: any) => res.json(user))
-    .catch(next);
+  wichtelService
+    .getWichtelee(req)
+    .then((wichtelee: WichteleeData) => res.json(wichtelee))
+    .catch(next)
 }
 
-export default wichtelRouter;
+export default wichtelRouter

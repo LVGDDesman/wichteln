@@ -8,6 +8,7 @@ function jwtauth() {
       // public routes that don't require authentication
       config.api.baseurl + "/user/authenticate",
       config.api.baseurl + "/user/create",
+      config.api.baseurl + "/user/reset",
     ],
   });
 }
