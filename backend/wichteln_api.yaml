@@ -1,188 +1,179 @@
 openapi: "3.0.3"
 info:
-  title: Wichteln API
-  version: "1.0"
+    title: Wichteln API
+    version: "1.0"
 servers:
-  - url: http://localhost:3000
-  - url: https://wichteln.desman.xyz
+    - url: http://localhost:3000
+    - url: https://wichteln.desman.xyz
 paths:
-  /api/user/authenticate:
-    post:
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/login-req"
-      responses:
-        "200":
-          description: User logged in
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/login-res"
-        "400":
-          description: Invalid Input
-        "500":
-          description: Invalid Input
-  /api/user/create:
-    post:
-      description: Add User and login at the same time.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/addUser-req"
-      responses:
-        "201":
-          description: User created
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/login-res"
-        "400":
-          description: Invalid Input
-        "401":
-          description: Missing/Wrong JWT
-  /api/user:
-    get:
-      description: Get UserInfo
+    /api/user/authenticate:
+        post:
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/login-req"
+            responses:
+                "200":
+                    description: User logged in
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/login-res"
+                "400":
+                    description: Invalid Input
+                "500":
+                    description: Invalid Input
+    /api/user/create:
+        post:
+            description: Add User and login at the same time.
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/addUser-req"
+            responses:
+                "201":
+                    description: User created
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/login-res"
+                "400":
+                    description: Invalid Input
+                "401":
+                    description: Missing/Wrong JWT
+    /api/user:
+        get:
+            description: Get UserInfo
 
-      responses:
-        "200":
-          description: User created
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/wholeUser"
-        "400":
-          description: Invalid Input
-        "401":
-          description: Missing/Wrong JWT
-  /api/user/update:
-    post:
-      description: Update User info.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/wholeUser"
-      responses:
-        "200":
-          description: User updated
-          #content:
-          #  application/json:
-          #    schema:
-          #      $ref: "#/components/schemas/login-res"
-        "400":
-          description: Invalid Input
-        "401":
-          description: Missing/Wrong JWT
-  /api/user/delete:
-    get:
-      responses:
-        "200":
-          description: User deleted
-        "400":
-          description: Invalid Input
-        "401":
-          description: Missing/Wrong JWT
-  /api/wichtel:
-    post:
-      description: Add wichteldata to own user
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/wichtelData"
-      responses:
-        "200":
-          description: Wichteldata successfully added
-        "400":
-          description: Invalid Input
-        "401":
-          description: Missing/Wrong JWT
-    get:
-      description: Get wichtelee of user
-      responses:
-        "200":
-          description: Wichteldata successfully added
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/wichtelee"
-        "400":
-          description: Invalid Input
-        "401":
-          description: Missing/Wrong JWT
+            responses:
+                "200":
+                    description: User created
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/wholeUser"
+                "400":
+                    description: Invalid Input
+                "401":
+                    description: Missing/Wrong JWT
+    /api/user/update:
+        post:
+            description: Update User info.
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/wholeUser"
+            responses:
+                "200":
+                    description: User updated
+                    #content:
+                    #  application/json:
+                    #    schema:
+                    #      $ref: "#/components/schemas/login-res"
+                "400":
+                    description: Invalid Input
+                "401":
+                    description: Missing/Wrong JWT
+    /api/user/delete:
+        get:
+            responses:
+                "200":
+                    description: User deleted
+                "400":
+                    description: Invalid Input
+                "401":
+                    description: Missing/Wrong JWT
+    /api/wichtel:
+        post:
+            description: Add wichteldata to own user
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/wichtelData"
+            responses:
+                "200":
+                    description: Wichteldata successfully added
+                "400":
+                    description: Invalid Input
+                "401":
+                    description: Missing/Wrong JWT
+        get:
+            description: Get wichtelee of user
+            responses:
+                "200":
+                    description: Wichteldata successfully added
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/wichtelee"
+                "400":
+                    description: Invalid Input
+                "401":
+                    description: Missing/Wrong JWT
 
 components:
-  schemas:
-    addUser-req:
-      type: object
-      properties:
-        username:
-          type: string
-        email:
-          type: string
-          format: email
-        password:
-          type: string
-    wholeUser:
-      type: object
-      properties:
-        username:
-          type: string
-          nullable: true
-        email:
-          type: string
-          format: email
-          nullable: true
-        password:
-          type: string
-          nullable: true
-    wichtelData:
-      type: object
-      properties:
-        address:
-          type: string
-          nullable: true
-        wish:
-          type: string
-          nullable: true
-    wichtelee:
-      type: object
-      properties:
-        username:
-          type: string
-          nullable: false
-        address:
-          type: string
-          nullable: true
-        wish:
-          type: string
-          nullable: true
-    login-req:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        password:
-          type: string
-    login-res:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        email:
-          type: string
-          format: email
-        username:
-          type: string
-        token:
-          type: string
+    schemas:
+        addUser-req:
+            type: object
+            properties:
+                username:
+                    type: string
+                email:
+                    type: string
+                    format: email
+                password:
+                    type: string
+        wholeUser:
+            type: object
+            properties:
+                username:
+                    type: string
+                    nullable: true
+                email:
+                    type: string
+                    format: email
+                    nullable: true
+                password:
+                    type: string
+                    nullable: true
+        wichtelData:
+            type: object
+            properties:
+                address:
+                    type: string
+                    nullable: true
+                wish:
+                    type: string
+                    nullable: true
+        wichtelee:
+            type: object
+            properties:
+                username:
+                    type: string
+                    nullable: false
+                address:
+                    type: string
+                    nullable: true
+                wish:
+                    type: string
+                    nullable: true
+        login-req:
+            type: object
+            properties:
+                username:
+                    type: string
+                password:
+                    type: string
+        login-res:
+            type: object
+            properties:
+                token:
+                    type: string

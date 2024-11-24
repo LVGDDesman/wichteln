@@ -13,3 +13,14 @@ export async function registerUser(
     })
     return response.data.token
 }
+
+export async function loginUser(
+    username: string,
+    password: string
+): Promise<string> {
+    const response = await axios.post(`${BASE_URL}/user/authenticate`, {
+        username: username,
+        password: password,
+    })
+    return response.data.token
+}

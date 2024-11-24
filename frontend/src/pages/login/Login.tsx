@@ -1,14 +1,28 @@
-import { useTranslation } from "react-i18next";
-import WichtelMann from "../../assets/santa.svg";
-import { InputWithLabel } from "../../components/inputs/InputWithLabel";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useTranslation } from "react-i18next"
+import WichtelMann from "../../assets/santa.svg"
+import { InputWithLabel } from "../../components/inputs/InputWithLabel"
+import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { useCookies } from "react-cookie"
+import { loginUser } from "../../utils/communication/loginRequests"
+import { LoadingSpinner } from "../../assets/loading-spinner"
 
 export default function Login() {
-    const { t } = useTranslation();
-    const navigate = useNavigate();
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const { t } = useTranslation()
+    const navigate = useNavigate()
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [cookies, setCookies] = useCookies(["user"])
+    const [loading, setLoading] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
+
+    function login() {
+        setLoading(true)
+        loginUser(username, password)
+            .then((jwt: string) => setCookies("user", jwt))
+            .catch((err) => setErrorMessage(err.response?.data?.message))
+            .finally(() => setLoading(false))
+    }
 
     return (
         <>
@@ -21,7 +35,13 @@ export default function Login() {
                 </div>
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form className="space-y-6">
+                    <form
+                        className="space-y-6"
+                        onSubmit={(e) => {
+                            login()
+                            e.preventDefault()
+                        }}
+                    >
                         <InputWithLabel
                             label={t("Username")}
                             onValueChange={setUsername}
@@ -32,10 +52,12 @@ export default function Login() {
                             labelAddendum={t("vergessen?")}
                             onValueChange={setPassword}
                         />
-
+                        {errorMessage && (
+                            <div className="text-red-600">{t("LoginFail")}</div>
+                        )}
                         <div>
                             <button className="flex w-full justify-center rounded-md bg-xmasprim px-3 py-1.5 text-sm/6 font-semibold text-xmastext shadow-sm hover:text-xmastext hover:bg-xmasacc focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-xmasacc">
-                                {t("Einloggen")}
+                                {loading ? <LoadingSpinner /> : t("Einloggen")}
                             </button>
                         </div>
                     </form>
@@ -43,7 +65,7 @@ export default function Login() {
                         {t("Teilnahmefrage")}
                         <a
                             onClick={() => {
-                                navigate("/register");
+                                navigate("/register")
                             }}
                             className="font-semibold text-xmasprim hover:text-xmasacc"
                         >
@@ -53,5 +75,5 @@ export default function Login() {
                 </div>
             </div>
         </>
-    );
+    )
 }

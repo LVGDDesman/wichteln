@@ -3,9 +3,9 @@ import WichtelMann from "../../assets/santa.svg"
 import { InputWithLabel } from "../../components/inputs/InputWithLabel"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
-import LoadingSpinner from "../../assets/loading-spinner.svg"
 import { registerUser } from "../../utils/communication/loginRequests"
 import { useCookies } from "react-cookie"
+import { LoadingSpinner } from "../../assets/loading-spinner"
 
 export default function Register() {
     const [cookies, setCookies] = useCookies(["user"])
@@ -15,11 +15,13 @@ export default function Register() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
 
     function register() {
         setLoading(true)
         registerUser(email, username, password)
             .then((jwt: string) => setCookies("user", jwt))
+            .catch((err) => setErrorMessage(err.response?.data?.message))
             .finally(() => setLoading(false))
     }
 
@@ -57,12 +59,18 @@ export default function Register() {
                             onValueChange={setPassword}
                         />
 
+                        {errorMessage && (
+                            <div className="text-red-600">
+                                {t("RegisterFail")}
+                            </div>
+                        )}
+
                         <div>
                             <button
                                 type="submit"
                                 className="flex w-full justify-center rounded-md bg-xmasprim px-3 py-1.5 text-sm/6 font-semibold text-xmastext shadow-sm hover:text-xmastext hover:bg-xmasacc focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-xmasacc"
                             >
-                                {loading ? LoadingSpinner : t("Teilnehmen")}
+                                {loading ? <LoadingSpinner /> : t("Teilnehmen")}
                             </button>
                         </div>
                     </form>

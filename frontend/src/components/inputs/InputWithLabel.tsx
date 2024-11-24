@@ -1,10 +1,10 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent } from "react"
 
 interface InputWithLabelProps {
-    label: string;
-    labelAddendum?: string;
-    type?: string;
-    onValueChange?: (input: string) => void;
+    label: string
+    labelAddendum?: string
+    type?: string
+    onValueChange?: (input: string) => void
 }
 
 export function InputWithLabel({
@@ -14,7 +14,7 @@ export function InputWithLabel({
     onValueChange = () => {},
 }: InputWithLabelProps) {
     function onEventToValueChange(e: ChangeEvent<any>) {
-        onValueChange(e.target.value);
+        onValueChange(e.target.value)
     }
 
     return (
@@ -26,14 +26,16 @@ export function InputWithLabel({
                 >
                     {label}
                 </label>
-                <div className="text-sm">
-                    <a
-                        href="#"
-                        className="font-semibold text-xmasprim hover:text-xmasacc"
-                    >
-                        {labelAddendum}
-                    </a>
-                </div>
+                {labelAddendum && (
+                    <div className="text-sm">
+                        <a
+                            href="#"
+                            className="font-semibold text-xmasprim hover:text-xmasacc"
+                        >
+                            {labelAddendum}
+                        </a>
+                    </div>
+                )}
             </div>
             <div className="mt-2">
                 <input
@@ -46,5 +48,5 @@ export function InputWithLabel({
                 />
             </div>
         </div>
-    );
+    )
 }

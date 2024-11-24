@@ -11,6 +11,8 @@
         "Teilnehmen": "Teilnehmen",
         "Loginfrage": "Du nimmst bereits teil?",
         "Loginlink": "Logge dich hier ein!",
-        "E-Mail": "E-Mail"
+        "E-Mail": "E-Mail",
+        "LoginFail": "Falsches Passwort oder Username. Bitte erneut versuchen",
+        "RegisterFail": "Account existiert bereits"
     }
 }

@@ -1,15 +1,16 @@
-import "./App.css";
-import Login from "./pages/login/Login";
-import i18n from "i18next";
-import { initReactI18next, useTranslation } from "react-i18next";
-import DeLocale from "./locales/de.json";
-import DeppLocale from "./locales/depp.json";
-import { HappyNeutralEmoticonButton } from "./components/button/HappyNeutralEmoticonButton";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { RedirectToLogin } from "./pages/RedirectToLogin";
-import Register from "./pages/login/Register";
-import { CookiesProvider } from "react-cookie";
-import { RedirectWhenLogged } from "./pages/RedirectWhenLogged";
+import "./App.css"
+import Login from "./pages/login/Login"
+import i18n from "i18next"
+import { initReactI18next, useTranslation } from "react-i18next"
+import DeLocale from "./locales/de.json"
+import DeppLocale from "./locales/depp.json"
+import { HappyNeutralEmoticonButton } from "./components/button/HappyNeutralEmoticonButton"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { RedirectToLogin } from "./pages/RedirectToLogin"
+import Register from "./pages/login/Register"
+import { CookiesProvider } from "react-cookie"
+import { RedirectWhenLogged } from "./pages/RedirectWhenLogged"
+import { Wichteln } from "./pages/wichteln/Wichteln"
 
 i18n.use(initReactI18next) // passes i18n down to react-i18next
     .init({
@@ -23,10 +24,10 @@ i18n.use(initReactI18next) // passes i18n down to react-i18next
         interpolation: {
             escapeValue: false,
         },
-    });
+    })
 
 function App() {
-    const { i18n } = useTranslation();
+    const { i18n } = useTranslation()
     return (
         <CookiesProvider>
             <BrowserRouter>
@@ -38,6 +39,10 @@ function App() {
                     <Route
                         path="/register"
                         element={<RedirectWhenLogged children={<Register />} />}
+                    />
+                    <Route
+                        path="/wichteln"
+                        element={<RedirectToLogin children={<Wichteln />} />}
                     />
                     <Route
                         path="*"
@@ -57,7 +62,7 @@ function App() {
                 </footer>
             </BrowserRouter>
         </CookiesProvider>
-    );
+    )
 }
 
-export default App;
+export default App

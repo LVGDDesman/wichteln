@@ -11,6 +11,8 @@
         "Teilnehmen": "Kuss aufs Auge",
         "Loginfrage": "Du bist bereits Reich?",
         "Loginlink": "Gönn mal!",
-        "E-Mail": "COD GamerTag"
+        "E-Mail": "COD GamerTag",
+        "LoginFail": "Brudi... Hackerman oder was los?",
+        "RegisterFail": "Doppelgänger am start!"
     }
 }
