@@ -1,5 +1,10 @@
 import mariadb from "mariadb"
-import { externalUser, User } from "../models/models"
+import {
+  externalUser,
+  User,
+  WichtelData,
+  WichteleeData,
+} from "../models/models"
 const config = require("../../config.json")
 
 let instance: any
@@ -145,6 +150,61 @@ class DataBase {
       con = await this.pool.getConnection()
       const query = "DELETE FROM user WHERE id=?;"
       await con.query(query, [id])
+    } catch (e) {
+      console.log(e)
+      throw e
+    } finally {
+      if (con) con.release()
+    }
+  }
+
+  // WichtelData
+  async getWichtelData(id: Number): Promise<WichtelData> {
+    let con
+    try {
+      con = await this.pool.getConnection()
+
+      const query = "SELECT wish, address FROM user WHERE id = ?"
+      const result = await con.query(query, [id])
+      return result[0]
+    } catch (e) {
+      console.log(e)
+      throw e
+    } finally {
+      if (con) con.release()
+    }
+  }
+
+  async setWichtelData(id: Number, wichtelData: WichtelData) {
+    let con
+    try {
+      con = await this.pool.getConnection()
+
+      if (wichtelData.wish) {
+        let query = "UPDATE user SET wish = ? WHERE id = ?"
+        await con.query(query, [wichtelData.wish, id])
+      }
+      if (wichtelData.address) {
+        let query = "UPDATE user SET address = ? WHERE id = ?"
+        await con.query(query, [wichtelData.address, id])
+      }
+    } catch (e) {
+      console.log(e)
+      throw e
+    } finally {
+      if (con) con.release()
+    }
+  }
+
+  async getWichteleeData(id: Number): Promise<WichteleeData> {
+    let con
+    try {
+      con = await this.pool.getConnection()
+
+      const query =
+        "SELECT a.wish, a.address, a.username from user as a inner join user as b on a.id = b.wichtelee where b.id = ?"
+      const result = await con.query(query, [id])
+      return result[0]
     } catch (e) {
       console.log(e)
       throw e

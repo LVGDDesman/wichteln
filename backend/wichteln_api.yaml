@@ -25,6 +25,25 @@ paths:
           description: Invalid Input
         "500":
           description: Invalid Input
+  /api/user/reset:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/email"
+      responses:
+        "200":
+          description: User logged in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/login-res"
+        "400":
+          description: Invalid Input
+        "500":
+          description: Invalid Input
   /api/user/create:
     post:
       description: Add User and login at the same time.
@@ -135,6 +154,12 @@ paths:
 
 components:
   schemas:
+    email:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
     addUser-req:
       type: object
       properties:
@@ -182,6 +207,9 @@ components:
         wish:
           type: string
           nullable: true
+        enddate:
+          type: integer
+          nullable: false
     login-req:
       type: object
       properties:

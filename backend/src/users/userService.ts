@@ -10,6 +10,7 @@ export async function createUser(user: User): Promise<externalUser> {
   const hash = Authenticator.hashPassword(user.password)
   user.id = await DataBaseInstance.createUser(user.username, user.email, hash)
   const loginData: login = { username: user.username, password: user.password }
+
   return await authenticate(loginData)
 }
 
@@ -56,7 +57,6 @@ export async function updateUser(req: any) {
   }
   await DataBaseInstance.updateUser(newUser)
 }
-
 export async function deleteUser(req: any) {
   const id = req.auth.userId
   await DataBaseInstance.deleteUser(id)
