@@ -1,7 +1,7 @@
 import { User } from "../models/models"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
-const config = require("../../config.json")
+const config = require("../config.json")
 
 class Authenticator {
   static hashPassword(password: string): string {

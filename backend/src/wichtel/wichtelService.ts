@@ -1,6 +1,6 @@
 import { WichtelData, WichteleeData, WichtelInfo } from "../models/models"
 import DataBaseInstance from "../services/databaseService"
-const config = require("../../config.json")
+const config = require("../config.json")
 
 export async function setWichtelData(req: any) {
   const userId: number = req.auth.userId

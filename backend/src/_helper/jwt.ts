@@ -1,8 +1,8 @@
-import { expressjwt } from "express-jwt";
-const config = require("../../config.json");
+import { expressjwt } from "express-jwt"
+const config = require("../config.json")
 
 function jwtauth() {
-  const secret: string = config.jwt.secret;
+  const secret: string = config.jwt.secret
   return expressjwt({ secret, algorithms: ["HS256"] }).unless({
     path: [
       // public routes that don't require authentication
@@ -10,7 +10,7 @@ function jwtauth() {
       config.api.baseurl + "/user/create",
       config.api.baseurl + "/user/reset",
     ],
-  });
+  })
 }
 
-export default jwtauth;
+export default jwtauth
