@@ -38,9 +38,15 @@ function updateUser(req: express.Request, res: express.Response, next: any) {
     .catch(next)
 }
 function deleteUser(req: express.Request, res: express.Response, next: any) {
-  userService.deleteUser(req).catch(next)
+  userService
+    .deleteUser(req)
+    .then(() => res.json())
+    .catch(next)
 }
 function resetPassword(req: express.Request, res: express.Response, next: any) {
-  userService.resetPassword(req.body).catch(next)
+  userService
+    .resetPassword(req.body)
+    .then(() => res.json())
+    .catch(next)
 }
 export default userRouter

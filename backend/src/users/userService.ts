@@ -18,7 +18,7 @@ export async function authenticate(userData: login): Promise<externalUser> {
   let { username, password } = userData
   const user: User = await DataBaseInstance.getUser(username)
 
-  if (!user) throw new Error("Username or password is incorrect")
+  if (!user) throw new Error("Username is incorrect: " + username)
   if (!Authenticator.authenticate(password, user.password))
     throw new Error("Username or password is incorrect")
 
@@ -31,11 +31,11 @@ export async function authenticate(userData: login): Promise<externalUser> {
 }
 
 export async function getUser(req: any): Promise<externalUser> {
-  return await DataBaseInstance.getUserData(req.auth.userId)
+  return await DataBaseInstance.getUserData(req.auth.id)
 }
 
 export async function updateUser(req: any) {
-  const id = req.auth.userId
+  const id = req.auth.id
   const oldUser: User = await DataBaseInstance.getUserById(id)
   const {
     username = oldUser.username,
@@ -58,7 +58,7 @@ export async function updateUser(req: any) {
   await DataBaseInstance.updateUser(newUser)
 }
 export async function deleteUser(req: any) {
-  const id = req.auth.userId
+  const id = req.auth.id
   await DataBaseInstance.deleteUser(id)
 }
 

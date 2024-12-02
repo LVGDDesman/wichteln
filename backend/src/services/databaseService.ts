@@ -34,6 +34,9 @@ class DataBase {
       connectionLimit: 5,
     })
   }
+  async close() {
+    this.pool.end()
+  }
 
   async userExists(
     username: string,
@@ -109,14 +112,14 @@ class DataBase {
     }
   }
 
-  async getUser(email: string): Promise<User> {
+  async getUser(username: string): Promise<User> {
     let con
     try {
       con = await this.pool.getConnection()
 
       const query =
-        "SELECT id, username, email, password FROM user WHERE email = ?"
-      const result = await con.query(query, [email])
+        "SELECT id, username, email, password FROM user WHERE username = ?"
+      const result = await con.query(query, [username])
       let user: User = result[0]
       return user
     } catch (e) {

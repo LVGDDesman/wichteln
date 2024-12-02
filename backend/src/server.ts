@@ -4,6 +4,7 @@ import jwtauth from "./_helper/jwt"
 import * as OpenApiValidator from "express-openapi-validator"
 import wichtelRouter from "./wichtel/wichtelController"
 import userRouter from "./users/userController"
+import DataBaseInstance from "./services/databaseService"
 
 const app = express()
 const cors = require("cors")
@@ -27,6 +28,13 @@ app.use(baseurl + "/wichtel", wichtelRouter)
 app.use(errorHandler)
 
 // Start the server
-module.exports = app.listen(3000, () => {
+const server: any = app.listen(3000, () => {
   console.log("Server listening on port 3000")
 })
+
+server.closeServer = () => {
+  DataBaseInstance.close()
+  server.close()
+}
+
+module.exports = server
