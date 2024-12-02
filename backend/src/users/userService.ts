@@ -66,7 +66,7 @@ export async function resetPassword(req: any) {
   const email: string = req.email
   let user: User = await DataBaseInstance.getUser(email)
   if (!user) throw Error("Email does not exist!")
-  const passwords: Array<string> = require("../../passwords.json")
+  const passwords: Array<string> = require("../passwords.json")
   let password: string = ""
   for (let i: number = 0; i < 3; i++) {
     password += passwords[Math.floor(Math.random() * passwords.length)]

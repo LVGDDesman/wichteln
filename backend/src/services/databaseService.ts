@@ -5,7 +5,7 @@ import {
   WichtelData,
   WichteleeData,
 } from "../models/models"
-const config = require("../../config.json")
+const config = require("../config.json")
 
 let instance: any
 

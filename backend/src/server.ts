@@ -14,11 +14,11 @@ app.use(cors())
 app.options("*", cors())
 app.use(jwtauth())
 app.use(
-    OpenApiValidator.middleware({
-        apiSpec: "./wichteln_api.yaml",
-        validateRequests: true,
-        validateResponses: true,
-    })
+  OpenApiValidator.middleware({
+    apiSpec: "./wichteln_api.yaml",
+    validateRequests: true,
+    validateResponses: true,
+  })
 )
 
 app.use(baseurl + "/user", userRouter)
@@ -27,6 +27,6 @@ app.use(baseurl + "/wichtel", wichtelRouter)
 app.use(errorHandler)
 
 // Start the server
-app.listen(3000, () => {
-    console.log("Server listening on port 3000")
+module.exports = app.listen(3000, () => {
+  console.log("Server listening on port 3000")
 })

@@ -1,6 +1,6 @@
 import { User } from "../models/models"
 import nodemailer, { Transporter } from "nodemailer"
-const config = require("../../config.json")
+const config = require("../config.json")
 
 let instance: any
 

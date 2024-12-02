@@ -64,25 +64,6 @@ paths:
           description: Invalid Input
         "401":
           description: Missing/Wrong JWT
-  /api/user/reset:
-    post:
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/email"
-      responses:
-        "200":
-          description: User logged in
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/login-res"
-        "400":
-          description: Invalid Input
-        "500":
-          description: Invalid Input
   /api/user:
     get:
       description: Get UserInfo
@@ -230,9 +211,3 @@ components:
           type: string
         token:
           type: string
-    email:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
