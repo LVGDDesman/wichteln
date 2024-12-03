@@ -16,6 +16,10 @@ export interface User {
     password: string
 }
 
+export interface UserWithWichtelee extends User {
+    wichtelee: number
+}
+
 export interface WichtelData {
     wish?: string
     address?: string

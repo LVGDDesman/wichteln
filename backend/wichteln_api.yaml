@@ -164,19 +164,29 @@ paths:
                     description: Invalid Input
                 "401":
                     description: Missing/Wrong JWT
-    /api/wichtel/start:
+    /api/wichtel/end:
         post:
-            description: Starts the raffle and assigns wichtelees to all participants.
+            description: Ends the raffle and assigns wichtelees to all participants.
             tags:
                 - Wichtel
             responses:
                 "200":
-                    description: Successfully started!
+                    description: Successfully ended!
                 "401":
                     description: Missing/Wrong JWT
                 "409":
-                    description: Already Started cannot start again
-    /api/wichtel/date:
+                    description: Already ended cannot end again
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/error"
+                "412":
+                    description: Its not yet time to end wichtel
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/error"
+    /api/wichtel/enddate:
         get:
             description: Gets the date until when submitting new wichtel data is possible. After that time you should get notified who your wichtelee is.
             tags:
@@ -193,6 +203,12 @@ paths:
 
 components:
     schemas:
+        error:
+            type: object
+            properties:
+                message:
+                    type: string
+                    example: You did something wrong, here is what!
         email:
             type: object
             properties:
