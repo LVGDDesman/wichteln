@@ -7,8 +7,8 @@ const wichtelRouter = express.Router()
 wichtelRouter.post("/", setWichtelData)
 wichtelRouter.get("/", getWichtelData)
 wichtelRouter.get("/wichtelee", getWichtelee)
-wichtelRouter.post("/start", startWichtel)
-wichtelRouter.get("/date", getWichtelDate)
+wichtelRouter.post("/end", endWichtel)
+wichtelRouter.get("/enddate", getWichtelEndDate)
 
 function setWichtelData(
     req: express.Request,
@@ -34,20 +34,20 @@ function getWichtelee(req: express.Request, res: express.Response, next: any) {
         .catch(next)
 }
 
-function startWichtel(req: express.Request, res: express.Response, next: any) {
+function endWichtel(req: express.Request, res: express.Response, next: any) {
     wichtelService
-        .startWichtel()
+        .endWichtel()
         .then((_) => res.json())
         .catch(next)
 }
 
-function getWichtelDate(
+function getWichtelEndDate(
     req: express.Request,
     res: express.Response,
     next: any
 ) {
     wichtelService
-        .getWichtelDate()
+        .getWichtelEndDate()
         .then((date) => res.json(date))
         .catch(next)
 }
