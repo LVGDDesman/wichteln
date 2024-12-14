@@ -13,6 +13,14 @@
         "Loginlink": "Logge dich hier ein!",
         "E-Mail": "E-Mail",
         "LoginFail": "Falsches Passwort oder Username. Bitte erneut versuchen",
-        "RegisterFail": "Account existiert bereits"
+        "RegisterFail": "Account existiert bereits",
+        "Wünsch": "Wünsch dir was",
+        "Losung": "Wichtelee Losung am:",
+        "Wunsch": "Wunsch",
+        "Adresse": "Adresse",
+        "ListeGo": "Auf die Liste!",
+        "ListeTooLate": "Wunsch ist schon beim Wichtelee",
+        "Schenk": "Beschenke deinen Wichtelee",
+        "DeinWichtelee": " wünscht sich"
     }
 }

@@ -4,14 +4,20 @@ interface InputWithLabelProps {
     label: string
     labelAddendum?: string
     type?: string
+    placeholder?: string
     onValueChange?: (input: string) => void
+    disabled?: boolean
+    defaultValue?: string
 }
 
 export function InputWithLabel({
     label,
     labelAddendum,
     type = "text",
+    placeholder = "",
     onValueChange = () => {},
+    disabled = false,
+    defaultValue = "",
 }: InputWithLabelProps) {
     function onEventToValueChange(e: ChangeEvent<any>) {
         onValueChange(e.target.value)
@@ -45,6 +51,9 @@ export function InputWithLabel({
                     required
                     className="block w-full rounded-md border-0 px-1 py-1.5 bg-xmassec text-xmastext shadow-sm ring-1 ring-inset ring-xmasacc focus:ring-2 focus:ring-inset focus:ring-xmasacc sm:text-sm/6"
                     onChange={onEventToValueChange}
+                    placeholder={placeholder}
+                    disabled={disabled}
+                    defaultValue={defaultValue}
                 />
             </div>
         </div>

@@ -23,21 +23,21 @@ class DataBase {
         }
         instance = this
 
-    this.dbHost = config.db.host
-    this.dbUser = config.db.user
-    this.dbPassword = config.db.password
-    this.database = config.db.database
-    this.pool = mariadb.createPool({
-      host: this.dbHost,
-      user: this.dbUser,
-      password: "" + this.dbPassword,
-      database: this.database,
-      connectionLimit: 5,
-    })
-  }
-  async close() {
-    this.pool.end()
-  }
+        this.dbHost = config.db.host
+        this.dbUser = config.db.user
+        this.dbPassword = config.db.password
+        this.database = config.db.database
+        this.pool = mariadb.createPool({
+            host: this.dbHost,
+            user: this.dbUser,
+            password: "" + this.dbPassword,
+            database: this.database,
+            connectionLimit: 5,
+        })
+    }
+    async close() {
+        this.pool.end()
+    }
 
     async userExists(
         username: string,
@@ -113,23 +113,23 @@ class DataBase {
         }
     }
 
-  async getUser(username: string): Promise<User> {
-    let con
-    try {
-      con = await this.pool.getConnection()
+    async getUser(username: string): Promise<User> {
+        let con
+        try {
+            con = await this.pool.getConnection()
 
-      const query =
-        "SELECT id, username, email, password FROM user WHERE username = ?"
-      const result = await con.query(query, [username])
-      let user: User = result[0]
-      return user
-    } catch (e) {
-      console.log(e)
-      throw e
-    } finally {
-      if (con) con.release()
+            const query =
+                "SELECT id, username, email, password FROM user WHERE username = ?"
+            const result = await con.query(query, [username])
+            let user: User = result[0]
+            return user
+        } catch (e) {
+            console.log(e)
+            throw e
+        } finally {
+            if (con) con.release()
+        }
     }
-  }
 
     async getUserData(id: Number): Promise<externalUser> {
         let con

@@ -2,6 +2,7 @@ import express from "express"
 import wichtelService = require("./wichtelService")
 import { WichtelData, WichteleeData } from "../models/models"
 import { date } from "express-openapi-validator/dist/framework/base.serdes"
+import { getUserIdFromRequest } from "../_helper/jwt"
 
 const wichtelRouter = express.Router()
 wichtelRouter.post("/", setWichtelData)
@@ -15,7 +16,10 @@ function setWichtelData(
     res: express.Response,
     next: any
 ) {
-    wichtelService.setWichtelData(req.body).catch(next)
+    wichtelService
+        .setWichtelData(getUserIdFromRequest(req), req.body)
+        .then(() => res.json())
+        .catch(next)
 }
 function getWichtelData(
     req: express.Request,
@@ -23,13 +27,13 @@ function getWichtelData(
     next: any
 ) {
     wichtelService
-        .getWichtelData(req)
+        .getWichtelData(getUserIdFromRequest(req))
         .then((wichtelData: WichtelData) => res.json(wichtelData))
         .catch(next)
 }
 function getWichtelee(req: express.Request, res: express.Response, next: any) {
     wichtelService
-        .getWichtelee(req)
+        .getWichtelee(getUserIdFromRequest(req))
         .then((wichtelee: WichteleeData) => res.json(wichtelee))
         .catch(next)
 }

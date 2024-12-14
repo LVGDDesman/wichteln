@@ -9,23 +9,23 @@ import {
 import DataBaseInstance from "../services/databaseService"
 const config = require("../config.json")
 
-export async function setWichtelData(req: any) {
-    const userId: number = req.auth.userId
-    const wichtelData: WichtelData = req.body
+export async function setWichtelData(userId: Number, req: any) {
+    const wichtelData: WichtelData = req
     await DataBaseInstance.setWichtelData(userId, wichtelData)
 }
 
-export async function getWichtelData(req: any): Promise<WichtelData> {
-    const userId: number = req.auth.userId
+export async function getWichtelData(userId: Number): Promise<WichtelData> {
     const wichtelInfo: WichtelData = {
         ...(await DataBaseInstance.getWichtelData(userId)),
     }
     return wichtelInfo
 }
 
-export async function getWichtelee(req: any): Promise<WichteleeData> {
-    const userId: number = req.auth.userId
-    return await DataBaseInstance.getWichteleeData(userId)
+export async function getWichtelee(userId: Number): Promise<WichteleeData> {
+    const wichteleeInfo: WichteleeData = {
+        ...(await DataBaseInstance.getWichteleeData(userId)),
+    }
+    return wichteleeInfo
 }
 
 export async function endWichtel(): Promise<void> {
