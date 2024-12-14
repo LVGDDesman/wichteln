@@ -1,0 +1,19 @@
+include:
+  - compose.yaml
+
+services:
+  backend:
+    image: wichteln-backend
+    build: ./backend/
+    hostname: backend.wichteln.local
+    restart: no
+    ports:
+      - 3000:3000
+
+  frontend:
+    image: wichteln-frontend
+    build: ./frontend/
+    hostname: frontend.wichteln.local
+    restart: no
+    ports:
+      - 5173:5173
