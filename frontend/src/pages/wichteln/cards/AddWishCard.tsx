@@ -96,6 +96,8 @@ export function AddWishCard({ disabled = false }) {
                                 <LoadingSpinner />
                             ) : disabled ? (
                                 t("ListeTooLate")
+                            ) : wishP ? (
+                                t("ListeChange")
                             ) : (
                                 t("ListeGo")
                             )}
