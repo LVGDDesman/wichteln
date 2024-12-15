@@ -3,16 +3,9 @@ services:
     image: mariadb
     hostname: mariadb.local
     restart: always
-    environment:
-      MARIADB_ROOT_PASSWORD: 123456
-      MARIADB_USER: wichteln
-      MARIADB_PASSWORD: 123456
-      MARIADB_DATABASE: wichteln
-    ports:
-      - 3306:3306
+    env_file: ~/docker_data/wichteln/mariadb.env
+    volumes:
+      - mariadb_data:/var/lib/mysql
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 28080:8080
+volumes:
+  mariadb_data:
