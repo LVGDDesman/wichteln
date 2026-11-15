@@ -5,7 +5,7 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . .
-# Backend URL is baked into the bundle at build time (defaults to the value in .env)
+# Backend URL is baked into the bundle at build time (unset = same-origin /api via the proxy)
 ARG VITE_BACKEND_BASE_URL
 ENV VITE_BACKEND_BASE_URL=${VITE_BACKEND_BASE_URL}
 RUN if [ -z "$VITE_BACKEND_BASE_URL" ]; then unset VITE_BACKEND_BASE_URL; fi; npm run build
