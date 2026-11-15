@@ -8,6 +8,7 @@ interface InputWithLabelProps {
     onValueChange?: (input: string) => void
     disabled?: boolean
     defaultValue?: string
+    value?: string
 }
 
 export function InputWithLabel({
@@ -18,6 +19,7 @@ export function InputWithLabel({
     onValueChange = () => {},
     disabled = false,
     defaultValue = "",
+    value,
 }: InputWithLabelProps) {
     function onEventToValueChange(e: ChangeEvent<any>) {
         onValueChange(e.target.value)
@@ -53,7 +55,9 @@ export function InputWithLabel({
                     onChange={onEventToValueChange}
                     placeholder={placeholder}
                     disabled={disabled}
-                    defaultValue={defaultValue}
+                    {...(value !== undefined
+                        ? { value }
+                        : { defaultValue })}
                 />
             </div>
         </div>

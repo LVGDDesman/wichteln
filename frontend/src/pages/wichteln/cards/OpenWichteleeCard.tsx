@@ -24,10 +24,10 @@ export function OpenWichteleeCard() {
     function fetchWichtelee() {
         setLoading(true)
         getWichtelee(cookies.user)
-            .then((data: WichteleeData) => {
-                setWish(data.wish)
-                setAddress(data.address)
-                setWichtelee(data.username)
+            .then((data: Partial<WichteleeData>) => {
+                setWish(data.wish ?? "")
+                setAddress(data.address ?? "")
+                setWichtelee(data.username ?? "")
             })
             .catch((err) => setErrorMessage(err.response?.data?.message))
             .finally(() => setLoading(false))
@@ -54,16 +54,14 @@ export function OpenWichteleeCard() {
                     <p className="text-lg font-bold text-black truncate block capitalize">
                         <InputWithLabel
                             label={t("Wunsch")}
-                            onValueChange={setWish}
-                            defaultValue={wish}
+                            value={wish}
                             disabled={true}
                         />
                     </p>
                     <p className="text-lg font-bold text-black truncate block capitalize">
                         <InputWithLabel
                             label={t("Adresse")}
-                            onValueChange={setAddress}
-                            defaultValue={address}
+                            value={address}
                             disabled={true}
                         />
                     </p>
@@ -80,8 +78,10 @@ export function OpenWichteleeCard() {
                         >
                             {loading ? (
                                 <LoadingSpinner />
-                            ) : (
+                            ) : wichtelee ? (
                                 wichtelee + t("DeinWichtelee")
+                            ) : (
+                                t("NochNichtGelost")
                             )}
                         </button>
                     </div>

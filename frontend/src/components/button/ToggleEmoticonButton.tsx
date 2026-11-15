@@ -1,6 +1,6 @@
 import { HTMLAttributes, useEffect, useState } from "react"
 
-interface ToggleEmoticonButtonProps extends HTMLAttributes<HTMLDivElement>{
+interface ToggleEmoticonButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, "onToggle">{
     defaultEmoticon: string
     toggleEmoticon:string
     onToggle:(toggled:boolean) => void 

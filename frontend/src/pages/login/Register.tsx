@@ -8,7 +8,7 @@ import { useCookies } from "react-cookie"
 import { LoadingSpinner } from "../../assets/loading-spinner"
 
 export default function Register() {
-    const [cookies, setCookies] = useCookies(["user"])
+    const [, setCookies] = useCookies(["user"])
     const { t } = useTranslation()
     const navigate = useNavigate()
     const [email, setEmail] = useState("")

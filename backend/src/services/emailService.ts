@@ -33,14 +33,7 @@ class EmailService {
       subject: "Du kommst auf die Liste der Unartigen!",
       text: `Hallo ${user.username},\n\nDein neues Passwort ist: ${password}\nBitte ändere es.\n\nTschüssi,\nDein Santa`,
     }
-    this.transporter.sendMail(message, function (error, info) {
-      if (error) {
-        console.log(error)
-        throw error
-      } else {
-        console.log("Email sent: " + info.response)
-      }
-    })
+    await this.transporter.sendMail(message)
   }
   async sendWichtelee(user: User, wichtelee: any) {
     var message = {
@@ -49,14 +42,7 @@ class EmailService {
       subject: "Du kommst auf die Liste der Unartigen!",
       text: `Hallo ${user.username},\n\nDein Wichtelpartner ist ${wichtelee.name}\n\nTschüssi,\nDein Santa`,
     }
-    this.transporter.sendMail(message, function (error, info) {
-      if (error) {
-        console.log(error)
-        throw error
-      } else {
-        console.log("Email sent: " + info.response)
-      }
-    })
+    await this.transporter.sendMail(message)
   }
 }
 let EmailServiceInstance = Object.freeze(new EmailService())

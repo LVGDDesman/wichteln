@@ -38,9 +38,11 @@ export function AddWishCard({ disabled = false }) {
     function submitWish() {
         setLoading(true)
         submitWichtelData(cookies.user, { wish: wish, address: address })
-            .then((data: WichtelData) => {
-                setWishP(data.wish)
-                setAddressP(data.address)
+            .then(() => {
+                // Backend responds with an empty body; it only stores non-empty values
+                if (wish) setWishP(wish)
+                if (address) setAddressP(address)
+                setErrorMessage("")
             })
             .catch((err) => setErrorMessage(err.response?.data?.message))
             .finally(() => setLoading(false))

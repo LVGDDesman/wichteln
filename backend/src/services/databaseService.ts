@@ -49,7 +49,7 @@ class DataBase {
             con = await this.pool.getConnection()
 
             const query =
-                "SELECT COUNT(*) as count FROM user WHERE username = ? OR email = ? AND id != ?"
+                "SELECT COUNT(*) as count FROM user WHERE (username = ? OR email = ?) AND id != ?"
             const rows = await con.query(query, [username, email, id])
             return rows[0]["count"] != 0
         } catch (e) {
@@ -119,8 +119,8 @@ class DataBase {
             con = await this.pool.getConnection()
 
             const query =
-                "SELECT id, username, email, password FROM user WHERE username = ?"
-            const result = await con.query(query, [username])
+                "SELECT id, username, email, password FROM user WHERE username = ? OR email = ?"
+            const result = await con.query(query, [username, username])
             let user: User = result[0]
             return user
         } catch (e) {

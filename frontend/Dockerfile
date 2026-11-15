@@ -1,9 +1,16 @@
-FROM node:latest
+FROM node:24 AS build
 
-CMD mkdir /home/node/frontend
-COPY ./ /home/node/frontend/
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
 
-EXPOSE 5173
-WORKDIR /home/node/frontend
+COPY . .
+# Backend URL is baked into the bundle at build time (defaults to the value in .env)
+ARG VITE_BACKEND_BASE_URL
+ENV VITE_BACKEND_BASE_URL=${VITE_BACKEND_BASE_URL}
+RUN if [ -z "$VITE_BACKEND_BASE_URL" ]; then unset VITE_BACKEND_BASE_URL; fi; npm run build
 
-ENTRYPOINT npm run prod
+FROM nginx:1.27-alpine
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80
