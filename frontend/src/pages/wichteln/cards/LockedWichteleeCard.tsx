@@ -21,7 +21,11 @@ export function LockedWichteleeCard() {
 
             <div className="px-4 py-3 w-72 text-xmastext">
                 <div>{t("Losung")}</div>
-                <div>{new Date(cookies.date).toLocaleString("de-DE")}</div>
+                <div>{new Date(cookies.date).toLocaleString("de-DE", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric",
+                    })}</div>
             </div>
         </div>
     )
