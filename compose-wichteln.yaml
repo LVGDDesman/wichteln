@@ -6,11 +6,16 @@ services:
     image: wichteln-backend
     build: ./backend/
     hostname: backend.wichteln.local
+    restart: unless-stopped
+    environment:
+      TZ: Europe/Berlin
     volumes:
-      - ~/docker_data/wichteln/config.json:/home/node/backend/config.json
-    restart: always
+      - ~/docker_data/wichteln/config.json:/app/config.json:ro
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    # Only needed if your reverse proxy talks to the backend directly –
+    # the frontend container already proxies /api to it.
     ports:
       - 3000:3000
 
@@ -18,6 +23,8 @@ services:
     image: wichteln-frontend
     build: ./frontend/
     hostname: frontend.wichteln.local
-    restart: always
+    restart: unless-stopped
+    depends_on:
+      - backend
     ports:
-      - 5173:5173
+      - 5173:80

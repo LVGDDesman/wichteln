@@ -1,40 +1,21 @@
-import express, { application } from "express"
-import errorHandler from "./_helper/errorhandler"
-import jwtauth from "./_helper/jwt"
-import * as OpenApiValidator from "express-openapi-validator"
-import wichtelRouter from "./wichtel/wichtelController"
-import userRouter from "./users/userController"
-import DataBaseInstance from "./services/databaseService"
+import { createApp } from "./app.ts"
+import { config } from "./config.ts"
+import { closeDb, migrate } from "./db.ts"
+import { scheduleDraw } from "./wichtel/wichtelService.ts"
 
-const app = express()
-const cors = require("cors")
-const baseurl = "/api"
+await migrate()
 
-app.use(express.json())
-app.use(cors())
-app.options("*", cors())
-app.use(jwtauth())
-app.use(
-  OpenApiValidator.middleware({
-    apiSpec: "./wichteln_api.yaml",
-    validateRequests: true,
-    validateResponses: true,
-  })
-)
-
-app.use(baseurl + "/user", userRouter)
-app.use(baseurl + "/wichtel", wichtelRouter)
-
-app.use(errorHandler)
-
-// Start the server
-const server: any = app.listen(3000, () => {
-  console.log("Server listening on port 3000")
+const server = createApp().listen(config.port, () => {
+  console.log(`🎄 Wichteln backend listening on port ${config.port}`)
 })
 
-server.closeServer = () => {
-  DataBaseInstance.close()
-  server.close()
-}
+scheduleDraw()
 
-module.exports = server
+function shutdown(signal: string) {
+  console.log(`${signal} received, shutting down…`)
+  server.close(() => {
+    closeDb().finally(() => process.exit(0))
+  })
+}
+process.on("SIGTERM", shutdown)
+process.on("SIGINT", shutdown)

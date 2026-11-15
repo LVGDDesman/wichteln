@@ -1,27 +1,74 @@
 {
-  "translation": {
-    "Logge dich ein": "Logge dich ein",
-    "Username": "Name",
-    "Password": "Password",
-    "vergessen?": "vergessen?",
-    "Einloggen": "Einloggen",
-    "Teilnahmefrage": "Noch kein Wichtel?",
-    "Teilnahmelink": "Nehme hier teil!",
-    "Registrier dich für die Teilnahme": "Registrier dich für die Teilnahme",
-    "Teilnehmen": "Teilnehmen",
-    "Loginfrage": "Du nimmst bereits teil?",
-    "Loginlink": "Logge dich hier ein!",
-    "E-Mail": "E-Mail",
-    "LoginFail": "Falsches Passwort oder Username. Bitte erneut versuchen",
-    "RegisterFail": "Account existiert bereits",
-    "Wünsch": "Wünsch dir was",
-    "Losung": "Wichtelee Verlosung am:",
-    "Wunsch": "Wunsch",
-    "Adresse": "Adresse",
-    "ListeGo": "Auf die Liste!",
-    "ListeChange": "Wunsch ist beim Weihnachtsmann!",
-    "ListeTooLate": "Wunsch ist schon beim Wichtelee",
-    "Schenk": "Beschenke deinen Wichtelee",
-    "DeinWichtelee": " wünscht sich"
+  "field": {
+    "username": "Name",
+    "login": "Name oder E-Mail",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "newPassword": "Neues Passwort",
+    "newPasswordHint": "leer lassen = unverändert",
+    "wish": "Wunsch",
+    "address": "Adresse"
+  },
+  "login": {
+    "title": "Logge dich ein",
+    "submit": "Einloggen",
+    "forgot": "vergessen?",
+    "failed": "Falsches Passwort oder Name. Bitte erneut versuchen.",
+    "noAccount": "Noch kein Wichtel?",
+    "toRegister": "Nimm hier teil!"
+  },
+  "register": {
+    "title": "Registrier dich für die Teilnahme",
+    "submit": "Teilnehmen",
+    "exists": "Name oder E-Mail sind schon vergeben.",
+    "closed": "Die Anmeldung ist leider schon geschlossen.",
+    "hasAccount": "Du nimmst bereits teil?",
+    "toLogin": "Logge dich hier ein!"
+  },
+  "reset": {
+    "title": "Passwort vergessen?",
+    "intro": "Gib deine E-Mail-Adresse ein – der Weihnachtsmann schickt dir ein neues Passwort.",
+    "submit": "Neues Passwort anfordern",
+    "sent": "Falls ein Wichtel mit dieser Adresse existiert, ist ein neues Passwort unterwegs. Schau in dein Postfach!",
+    "back": "Zurück zum Login"
+  },
+  "wichteln": {
+    "titleBefore": "Wünsch dir was",
+    "titleAfter": "Beschenke deinen Wichtel",
+    "letterTo": "Lieber Weihnachtsmann,",
+    "submit": "Auf die Liste!",
+    "update": "Wunsch ändern",
+    "saved": "Wunsch ist beim Weihnachtsmann!",
+    "locked": "Wunsch ist schon beim Wichtel",
+    "drawOn": "Wichtel-Verlosung am",
+    "countdown": "Noch {{d}} T {{h}} Std {{m}} Min {{s}} Sek",
+    "drawing": "Die Lose werden gerade gezogen …",
+    "notDrawn": "Die Auslosung hat noch nicht stattgefunden. Schau gleich nochmal vorbei!",
+    "wichteleeWishes": "{{name}} wünscht sich:",
+    "noWish": "Kein Wunsch angegeben – lass dir was einfallen!",
+    "sendTo": "Geschenk geht an:",
+    "noAddress": "Keine Adresse angegeben"
+  },
+  "account": {
+    "title": "Dein Konto",
+    "save": "Speichern",
+    "saved": "Gespeichert!",
+    "taken": "Name oder E-Mail sind schon vergeben.",
+    "delete": "Teilnahme beenden",
+    "deleteConfirm": "Wirklich? Dein Konto und dein Wunsch werden gelöscht.",
+    "deleteYes": "Ja, löschen",
+    "cancel": "Abbrechen",
+    "deleteLocked": "Nach der Auslosung kannst du nicht mehr aussteigen – sonst bleibt jemand ohne Geschenk."
+  },
+  "nav": {
+    "wichteln": "Wichteln",
+    "account": "Konto",
+    "logout": "Abmelden",
+    "language": "Sprache wechseln"
+  },
+  "error": {
+    "generic": "Da ist etwas schiefgelaufen. Bitte versuch es nochmal.",
+    "network": "Keine Verbindung zum Nordpol. Bitte prüfe deine Internetverbindung.",
+    "invalid": "Bitte prüfe deine Eingaben (Passwort mindestens 6 Zeichen)."
   }
 }
