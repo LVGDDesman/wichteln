@@ -11,6 +11,7 @@ import Register from "./pages/login/Register"
 import { CookiesProvider } from "react-cookie"
 import { RedirectWhenLogged } from "./pages/RedirectWhenLogged"
 import { Wichteln } from "./pages/wichteln/Wichteln"
+import { Snowfall } from "./components/effects/Snowfall"
 
 i18n.use(initReactI18next) // passes i18n down to react-i18next
     .init({
@@ -30,6 +31,7 @@ function App() {
     const { i18n } = useTranslation()
     return (
         <CookiesProvider>
+            <Snowfall />
             <BrowserRouter>
                 <Routes>
                     <Route

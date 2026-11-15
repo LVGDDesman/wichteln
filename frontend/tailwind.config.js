@@ -4,7 +4,7 @@ export default {
     theme: {
         extend: {
             colors: {
-                xmasbg: "#a0dd6e",
+                xmasbg: "#86c454",
                 xmasprim: "#799451",
                 xmassec: "#b6cca3",
                 xmasacc: "#94bc76",
