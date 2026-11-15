@@ -1,59 +1,38 @@
-import { useCookies } from "react-cookie"
-import { AddWishCard } from "./cards/AddWishCard"
-import { LockedWichteleeCard } from "./cards/LockedWichteleeCard"
 import { useTranslation } from "react-i18next"
-import { useEffect, useState } from "react"
-import { getWichtelEndDate } from "../../utils/communication/wichteleeRequests"
-import { OpenWichteleeCard } from "./cards/OpenWichteleeCard"
+import { Alert, PageSpinner } from "../../components/ui"
+import { getStatus } from "../../lib/api"
+import { useAsync, useErrorMessage } from "../../lib/hooks"
+import { LockedCard, PendingCard } from "./LockedCard"
+import { WichteleeCard } from "./WichteleeCard"
+import { WishCard } from "./WishCard"
 
-export function Wichteln() {
-    const [cookies, setCookies] = useCookies(["user", "date"])
-    const { t } = useTranslation()
-    const [endDate, setEndDate] = useState("")
+export default function Wichteln() {
+  const { t } = useTranslation()
+  const status = useAsync(getStatus)
+  const message = useErrorMessage(status.error)
 
-    //at start determine when is endate, so we can determine what to show
-    useEffect(() => {
-        var end = cookies.date
-        if (end) {
-            setEndDate(end)
-        } else {
-            fetchEnddate()
-        }
-    }, [])
-
-    function fetchEnddate() {
-        getWichtelEndDate(cookies.user).then((date) => {
-            setCookies("date", date)
-            setEndDate(date)
-        })
-    }
-
-    function isBefore() {
-        if (!endDate) {
-            return true
-        }
-        return new Date(endDate) > new Date()
-    }
-
-    function isAfter() {
-        return !isBefore()
-    }
-
+  if (status.status === "loading") return <PageSpinner />
+  if (!status.data) {
     return (
-        <>
-            <div className="text-center p-10 text-xmastext">
-                <h1 className="font-bold text-4xl mb-4">
-                    {isBefore() ? t("Wünsch") : t("Schenk")}
-                </h1>
-            </div>
-
-            <section
-                id="Projects"
-                className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5"
-            >
-                <AddWishCard disabled={isAfter()} />
-                {isBefore() ? <LockedWichteleeCard /> : <OpenWichteleeCard />}
-            </section>
-        </>
+      <div className="mx-auto max-w-md pt-10">
+        <Alert>{message}</Alert>
+      </div>
     )
+  }
+
+  const { over, drawn, enddate } = status.data
+  return (
+    <>
+      <h1 className="pt-6 pb-10 text-center text-4xl font-bold">
+        {over ? t("wichteln.titleAfter") : t("wichteln.titleBefore")}
+      </h1>
+      <section className="mx-auto grid w-fit grid-cols-1 justify-items-center gap-x-14 gap-y-12 md:grid-cols-2">
+        <WishCard locked={over} />
+        {/* after the draw the wichtelee is what matters – show it first on mobile */}
+        <div className={over ? "max-md:order-first" : ""}>
+          {!over ? <LockedCard enddate={enddate} onReached={status.reload} /> : drawn ? <WichteleeCard /> : <PendingCard />}
+        </div>
+      </section>
+    </>
+  )
 }

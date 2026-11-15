@@ -1,26 +1,23 @@
 {
-  "api": {
-    "baseurl": "/api"
-  },
   "db": {
-    "host": "localhost",
+    "host": "mariadb.local",
     "user": "wichteln",
-    "password": "123456",
+    "password": "change-me",
     "database": "wichteln"
   },
   "jwt": {
-    "secret": "123456123456"
+    "secret": "replace-with-at-least-32-random-characters",
+    "expiresIn": "7d"
   },
   "mail": {
     "host": "mail.example.org",
-    "port": "587",
+    "port": 587,
     "tls": false,
     "user": "wichteln@example.org",
-    "password": "123456",
+    "password": "change-me",
     "username": "Der Santa"
   },
   "wichteln": {
-    "enddate": "2024-12-10T00:00:00Z",
-    "__comment": "Tuesday, 10. December 2024 00:00:00 GMT"
+    "enddate": "2026-12-10T00:00:00+01:00"
   }
 }

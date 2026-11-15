@@ -1,27 +1,74 @@
 {
-  "translation": {
-    "Logge dich ein": "Logge dich ein Habibi",
-    "Username": "Rapper Name",
-    "Password": "Secret Handshake",
-    "vergessen?": "valla vergessen?",
-    "Einloggen": "Gönn mal",
-    "Teilnahmefrage": "Noch kein Babo?",
-    "Teilnahmelink": "Komm in die Gruppe!",
-    "Registrier dich für die Teilnahme": "Werde ein Talahon!",
-    "Teilnehmen": "Kuss aufs Auge",
-    "Loginfrage": "Du bist bereits Reich?",
-    "Loginlink": "Gönn mal!",
-    "E-Mail": "COD GamerTag",
-    "LoginFail": "Brudi... Hackerman oder was los?",
-    "RegisterFail": "Doppelgänger am start!",
-    "Wünsch": "Wie viel auf Nacken?",
-    "Losung": "Chill mal bis:",
-    "Wunsch": "Will haben Code",
-    "Adresse": "Valla! DHL natürlich...",
-    "ListeGo": "Mmmmmh Memmo~",
-    "ListeChange": "Vibe Check bestanden",
-    "ListeTooLate": "Kannst nicht diesen machen",
-    "Schenk": "Kuss den anderen aufs Auge",
-    "DeinWichtelee": " will das"
+  "field": {
+    "username": "Rapper Name",
+    "login": "Rapper Name oder GamerTag",
+    "email": "COD GamerTag",
+    "password": "Secret Handshake",
+    "newPassword": "Neuer Handshake",
+    "newPasswordHint": "leer = bleibt wie's ist, Bruder",
+    "wish": "Will haben Code",
+    "address": "Valla! DHL natürlich..."
+  },
+  "login": {
+    "title": "Logge dich ein Habibi",
+    "submit": "Gönn mal",
+    "forgot": "valla vergessen?",
+    "failed": "Brudi... Hackerman oder was los?",
+    "noAccount": "Noch kein Babo?",
+    "toRegister": "Komm in die Gruppe!"
+  },
+  "register": {
+    "title": "Werde ein Talahon!",
+    "submit": "Kuss aufs Auge",
+    "exists": "Doppelgänger am start!",
+    "closed": "Zu spät Bruder, Tür ist zu.",
+    "hasAccount": "Du bist bereits Reich?",
+    "toLogin": "Gönn mal!"
+  },
+  "reset": {
+    "title": "Handshake vergessen, Brudi?",
+    "intro": "Gib deinen GamerTag, Santa schickt dir neuen Handshake per Brieftaube.",
+    "submit": "Schick rüber",
+    "sent": "Wenn's dich gibt, ist was unterwegs. Check Postfach, Digga!",
+    "back": "Zurück, Bruder"
+  },
+  "wichteln": {
+    "titleBefore": "Wie viel auf Nacken?",
+    "titleAfter": "Kuss den anderen aufs Auge",
+    "letterTo": "Lieber Weihnachtsmann,",
+    "submit": "Mmmmmh Memmo~",
+    "update": "Nochmal machen",
+    "saved": "Vibe Check bestanden",
+    "locked": "Kannst nicht diesen machen",
+    "drawOn": "Chill mal bis",
+    "countdown": "Noch {{d}} T {{h}} Std {{m}} Min {{s}} Sek, Sabr Bruder",
+    "drawing": "Lose werden gezogen, Augen zu …",
+    "notDrawn": "Noch nix gezogen. Komm gleich wieder, Habibi!",
+    "wichteleeWishes": "{{name}} will das:",
+    "noWish": "Will nix. Ehrenmann/Ehrenfrau.",
+    "sendTo": "DHL fährt hier hin:",
+    "noAddress": "Keine Adresse, Lieferung per Handschlag"
+  },
+  "account": {
+    "title": "Dein Profil, Babo",
+    "save": "Klar machen",
+    "saved": "Läuft!",
+    "taken": "Doppelgänger am start!",
+    "delete": "Raus aus der Gruppe",
+    "deleteConfirm": "Sicher, Bruder? Alles weg dann.",
+    "deleteYes": "Ja, weg damit",
+    "cancel": "Doch nicht",
+    "deleteLocked": "Zu spät zum Abhauen, Bruder. Einer wartet auf dich."
+  },
+  "nav": {
+    "wichteln": "Wichteln",
+    "account": "Profil",
+    "logout": "Tschüssikowski",
+    "language": "Sprache wechseln"
+  },
+  "error": {
+    "generic": "Wallah, irgendwas kaputt. Nochmal probieren.",
+    "network": "Kein Netz, Bruder. WLAN checken.",
+    "invalid": "Eingabe nix gut, Bruder (Handshake min. 6 Zeichen)."
   }
 }
